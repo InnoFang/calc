@@ -26,4 +26,8 @@
     <string name="zero">0</string>
     <string name="dot">.</string>
     <string name="equal">=</string>
+    <string name="log">log</string>
+    <string name="ln">ln</string>
+    <string name="pi">π</string>
+    <string name="e">e</string>
 </resources>

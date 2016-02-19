@@ -9,8 +9,8 @@ import android.widget.EditText;
  * Created by Administrator on 2016/2/14.
  */
 public class Display extends EditText {
-    private static float DEFAULT_MIN_TEXT_SIZE = 14;
-    private static float DEFAULT_MAX_TEXT_SIZE = 50;
+    private static float DEFAULT_MIN_TEXT_SIZE = 10;
+    private static float DEFAULT_MAX_TEXT_SIZE = 25;
 
     // Attributes
     private Paint testPaint;
@@ -48,7 +48,7 @@ public class Display extends EditText {
             testPaint.setTextSize(trySize);
             while ((trySize > minTextSize)
                     && (testPaint.measureText(text) > availableWidth)) {
-                trySize --;
+                trySize -= 5;
                 if (trySize <= minTextSize) {
                     trySize = minTextSize;
                     break;
