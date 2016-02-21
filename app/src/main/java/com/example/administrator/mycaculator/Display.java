@@ -40,8 +40,7 @@ public class Display extends EditText {
     }
 
     /**
-     * Re size the font so the specified text fits in the text box * assuming
-     * the text box is the specified width.
+     * 让字体大小随着文本输入的增多而逐渐减小
      */
     private void refitText(String text, int textWidth) {
         if (textWidth > 0) {
