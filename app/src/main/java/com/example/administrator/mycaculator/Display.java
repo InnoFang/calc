@@ -6,11 +6,9 @@ import android.util.AttributeSet;
 import android.widget.EditText;
 
 /**
- * Created by Administrator on 2016/2/14.
+ *  2016/2/14
  */
 public class Display extends EditText {
-    private static float DEFAULT_MIN_TEXT_SIZE = 10;
-    private static float DEFAULT_MAX_TEXT_SIZE = 25;
 
     // Attributes
     private Paint testPaint;
@@ -21,12 +19,17 @@ public class Display extends EditText {
         initialise();
     }
 
+    /**
+     * 初始化字体大小,若字体设置最大值小于默认值,就将字体大小设为默认值
+     * 且最小字体设置为默认值
+     */
     private void initialise() {
+        float DEFAULT_MIN_TEXT_SIZE = 10;
+        float DEFAULT_MAX_TEXT_SIZE = 25;
+
         testPaint = new Paint();
         testPaint.set(this.getPaint());
 
-        // max size defaults to the intially specified text size unless it is
-        // too small
         maxTextSize = this.getTextSize();
 
         if (maxTextSize <= DEFAULT_MAX_TEXT_SIZE) {
@@ -34,7 +37,7 @@ public class Display extends EditText {
         }
 
         minTextSize = DEFAULT_MIN_TEXT_SIZE;
-    };
+    }
 
     /**
      * Re size the font so the specified text fits in the text box * assuming
@@ -57,7 +60,7 @@ public class Display extends EditText {
             }
             this.setTextSize(trySize);
         }
-    };
+    }
 
     @Override
     protected void onTextChanged(CharSequence text, int start, int before,
@@ -66,8 +69,9 @@ public class Display extends EditText {
         refitText(text.toString(), this.getWidth());
     }
 
+
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged (int w, int h, int oldw, int oldh) {
         if (w != oldw) {
             refitText(this.getText().toString(), w);
         }

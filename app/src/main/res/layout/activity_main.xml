@@ -7,363 +7,168 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:weightSum="1"
-    android:background="#066ec8">
-
+    android:background="#066ec8"
+  >
     <com.example.administrator.mycaculator.Display
         android:layout_width="match_parent"
         android:layout_height="116dp"
         android:id="@+id/display"
         android:textSize="25sp"
         android:cursorVisible="true"
-        android:gravity="right|bottom"
+        android:gravity="end|bottom"
         android:background="#99ccff"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="1dp"
        />
-
-
     <TableRow
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
-
     <Button
-        android:layout_height="55dp"
-        android:layout_width="88dp"
+        style="@style/FunctionButton"
         android:id="@+id/clear"
         android:text="@string/clear"
-        android:textSize="40sp"
-        android:textColor="#fff"
-        android:background="#003366"
-        android:layout_marginLeft="1dp"
-
-        android:layout_marginRight="1dp"
-        android:layout_marginTop="1dp"/>
-
+        />
     <Button
-        android:layout_height="55dp"
+        style="@style/FunctionButton"
         android:id="@+id/tan"
         android:text="@string/tan"
-        android:textSize="40sp"
-        android:layout_width="88dp"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:background="#003366"
-        android:layout_marginLeft="1dp"
-
-        android:layout_marginRight="1dp"
-        android:layout_marginTop="1dp"/>
+      />
     <Button
-        android:layout_height="55dp"
+        style="@style/FunctionButton"
         android:id="@+id/fac"
         android:text="@string/fac"
-        android:textSize="40sp"
-        android:layout_width="88dp"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:background="#003366"
-        android:layout_marginLeft="1dp"
-
-        android:layout_marginRight="1dp"
-        android:layout_marginTop="1dp"
         />
-
-
     <Button
-        android:layout_height="55dp"
-        android:id="@+id/back"
-        android:text="@string/back"
-        android:textAllCaps="false"
-        android:textSize="40sp"
-        android:layout_width="88dp"
+        style="@style/FunctionButton"
+        android:id="@+id/del"
         android:textColor="#000000"
-        android:background="#4d4e58"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
-        android:layout_marginTop="1dp"
+        android:background="@drawable/back"
         />
-
-</TableRow>
-
+    </TableRow>
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/cos"
             android:text="@string/cos"
-            android:textSize="40sp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/sin"
             android:text="@string/sin"
-            android:textSize="40sp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/left"
             android:text="@string/left"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/right"
             android:text="@string/right"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
-
-
     </TableRow>
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/log"
             android:text="@string/log"
-            android:textAllCaps="false"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
-
+            />
         <Button
-            android:layout_height="55dp"
+            style="@style/FunctionButton"
             android:id="@+id/ln"
             android:text="@string/ln"
-            android:textSize="40sp"
-            android:layout_width="88dp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
+            />
         <Button
-            android:layout_height="55dp"
+            style="@style/FunctionButton"
             android:id="@+id/pi"
             android:text="@string/pi"
-            android:textSize="40sp"
-            android:layout_width="88dp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
-
         <Button
-            android:layout_height="55dp"
+            style="@style/FunctionButton"
             android:id="@+id/e"
             android:text="@string/e"
-            android:textAllCaps="false"
-            android:textSize="40sp"
-            android:layout_width="88dp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
     </TableRow>
-
-
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
-
-
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/square"
             android:text="@string/square"
-            android:textSize="40sp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
+            />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/sqrt"
             android:text="@string/sqrt"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/div"
             android:text="@string/divide"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
-
+            />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/mul"
             android:text="@string/multiply"
-            android:textSize="40sp"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
-
     </TableRow>
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/seven"
             android:text="@string/seven"
-            android:textSize="40sp"
-            android:textColor="#fff"
             android:background="#6699cc"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
+            android:background="#6699cc"
             android:id="@+id/eight"
             android:text="@string/eight"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#6699cc"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
+            android:background="#6699cc"
             android:id="@+id/nine"
             android:text="@string/nine"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#6699cc"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
+           />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/sub"
             android:text="@string/subtract"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
     </TableRow>
-
     <TableRow
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
+            android:background="#6699cc"
             android:id="@+id/four"
             android:text="@string/four"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#6699cc"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
+            style="@style/FunctionButton"
+            android:background="#6699cc"
             android:id="@+id/five"
-            android:layout_width="88dp"
             android:text="@string/five"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#6699cc"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
+            android:background="#6699cc"
             android:id="@+id/six"
             android:text="@string/six"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#6699cc"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"/>
-
+            />
         <Button
-            android:layout_height="55dp"
-            android:layout_width="88dp"
+            style="@style/FunctionButton"
             android:id="@+id/add"
             android:text="@string/add"
-            android:textSize="40sp"
-            android:textColor="#fff"
-            android:background="#003366"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
     </TableRow>
     <LinearLayout
@@ -379,81 +184,51 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
-                    android:layout_width="88dp"
-                    android:layout_height="55dp"
+                    style="@style/FunctionButton"
+                    android:background="#6699cc"
                     android:text="@string/one"
-                    android:textSize="40sp"
                     android:id="@+id/one"
-                    android:textColor="#fff"
-                    android:background="#6699cc"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"/>
+                   />
                 <Button
-                    android:layout_width="88dp"
-                    android:layout_height="55dp"
-                    android:text="@string/two"
-                    android:textSize="40sp"
-                    android:id="@+id/two"
-                    android:textColor="#fff"
+                    style="@style/FunctionButton"
                     android:background="#6699cc"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"
+                    android:text="@string/two"
+                    android:id="@+id/two"
                     />
                 <Button
-                    android:layout_width="88dp"
-                    android:layout_height="55dp"
+                    style="@style/FunctionButton"
+                    android:background="#6699cc"
                     android:text="@string/three"
                     android:textSize="40sp"
                     android:id="@+id/three"
-                    android:textColor="#fff"
-                    android:background="#6699cc"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"/>
+                    />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <Button
                     android:layout_width="178dp"
-                    android:layout_height="55dp"
+                    style="@style/FunctionButton"
+                    android:background="#6699cc"
                     android:text="@string/zero"
                     android:id="@+id/zero"
-                    android:textSize="40sp"
-                    android:textColor="#fff"
-                    android:background="#6699cc"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"/>
+                    />
                 <Button
-                    android:layout_width="88dp"
-                    android:layout_height="55dp"
-                    android:text="@string/dot"
-                    android:textSize="40sp"
-                    android:id="@+id/dot"
-                    android:textColor="#fff"
+                    style="@style/FunctionButton"
                     android:background="#6699cc"
-                    android:layout_marginLeft="1dp"
-                    android:layout_marginRight="1dp"
-                    android:layout_marginTop="1dp"/>
-
+                    android:text="@string/dot"
+                    android:id="@+id/dot"
+                    />
             </LinearLayout>
-
         </LinearLayout>
         <Button
-            android:layout_width="88dp"
-            android:layout_height="111sp"
+            style="@style/FunctionButton"
+            android:layout_height="111dp"
             android:text="@string/equal"
             android:textSize="50sp"
             android:id="@+id/equal"
             android:textColor="#000000"
             android:background="#4d4e58"
-            android:layout_marginLeft="1dp"
-            android:layout_marginRight="1dp"
-            android:layout_marginTop="1dp"
             />
-
     </LinearLayout>
 </LinearLayout>
