@@ -5,9 +5,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-/**
- *  2016/2/14
- */
+//让输入的文本字体随着输入的增多而逐渐减少
 public class Display extends EditText {
 
     // Attributes
