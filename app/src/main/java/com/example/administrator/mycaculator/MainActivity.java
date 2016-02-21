@@ -330,10 +330,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 display.setText (str_display.toString ());
                 break;
             case R.id.del:
-                //在得到结果后,如果点击了del键就清空
+                //在得到结果后,如果点击了del键就清空,并且打开dot的开关,没必要再继续执行下面的代码
                 if(result_flag) {
                      str_display = new StringBuffer ("");
+                    display.setText (str_display.toString ());
+                    flag= true;
                     result_flag = false;
+                    break;
             }
                 /*
                  * 检测字符串,为back按钮的删除方式提供依据
