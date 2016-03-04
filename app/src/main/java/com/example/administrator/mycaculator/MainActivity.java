@@ -201,6 +201,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     str_display.append ("0");
                     display.setText (str_display.toString ());
                 }
+
                 //防止出现重复点击
                 if(flag){
                     str_display.append (".");
