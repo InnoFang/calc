@@ -22,8 +22,8 @@ public class Display extends EditText {
      * 且最小字体设置为默认值
      */
     private void initialise() {
-        float DEFAULT_MIN_TEXT_SIZE = 10;
-        float DEFAULT_MAX_TEXT_SIZE = 25;
+        float DEFAULT_MIN_TEXT_SIZE = 35;
+        float DEFAULT_MAX_TEXT_SIZE = 50;
 
         testPaint = new Paint();
         testPaint.set(this.getPaint());
@@ -42,13 +42,12 @@ public class Display extends EditText {
      */
     private void refitText(String text, int textWidth) {
         if (textWidth > 0) {
-            int availableWidth = textWidth - this.getPaddingLeft()
-                    - this.getPaddingRight();
+            int availableWidth = 350;
             float trySize = maxTextSize;
             testPaint.setTextSize(trySize);
             while ((trySize > minTextSize)
                     && (testPaint.measureText(text) > availableWidth)) {
-                trySize -= 5;
+                trySize -= 3;
                 if (trySize <= minTextSize) {
                     trySize = minTextSize;
                     break;

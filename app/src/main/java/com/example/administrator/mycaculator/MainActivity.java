@@ -2,11 +2,13 @@ package com.example.administrator.mycaculator;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.math.BigInteger;
 import java.text.DecimalFormat;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -14,9 +16,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private Display display;
     private StringBuffer str_display = new StringBuffer(""); //显示
     private boolean flag = true;//小数点开关控制
-    private boolean result_flag = false;
-    //在点击等号之后为"true",若是在按完等号之后直接点数字,则默认清空str_display
+
+    //在点击等号之后result_flag 为"true",若是在按完等号之后直接点数字,则默认清空str_display
     //若是按完等号之后点击了运算符,就不清空str_display
+    private boolean result_flag = false;
+
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
@@ -90,6 +94,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         display.setText ("0.0");
         display.setSelection (str_display.length ());//光标的位置,设置成最后
         display.setFocusableInTouchMode (false);//虚拟键盘隐藏
+        display.setMovementMethod(ScrollingMovementMethod.getInstance ());
     }
 
     @Override
@@ -181,8 +186,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     str_display = new StringBuffer ("");
                     result_flag = false;
                 }
-                //第一次点击时没有数字,或者说如果点击之前没有数字(针对最后一个字符为运算符时),默认在前面添加0
-                if(str_display.toString ().equals ("") || str_display.charAt (str_display.length () - 1) != '1' &&
+                //第一次点击时为空,或者说如果点击之前没有数字(针对最后一个字符为运算符时),默认在前面添加0
+                if(str_display.toString ().equals ("") ||
+                        str_display.charAt (str_display.length () - 1) != '1' &&
                         str_display.charAt (str_display.length () - 1) != '2' &&
                         str_display.charAt (str_display.length () - 1) != '3' &&
                         str_display.charAt (str_display.length () - 1) != '4' &&
@@ -204,38 +210,51 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.add:
                 result_flag = false;
+
                 //若前面是运算符则删掉前面的运算符,添加新点击的运算符
                 if( str_display.toString ().equals ("")){
                     Toast.makeText(MainActivity.this,"你的内容为空",Toast.LENGTH_SHORT).show ();
                     break;
-                }else if(str_display.charAt (str_display.length () - 1) == '÷' ||
+                }else if(str_display.charAt (str_display.length () - 1) == '+' ||
+                        str_display.charAt (str_display.length () - 1) == '÷' ||
                         str_display.charAt (str_display.length () - 1) == '×'||
                         str_display.charAt (str_display.length () - 1) == '-'||
                         str_display.charAt (str_display.length () - 1) == '^'||
                         str_display.charAt (str_display.length () - 1) == '√'){
                     str_display.deleteCharAt (str_display.length () - 1);
+                    display.setText (str_display.toString ());
                 }
-                str_display.append ("+");
-                display.setText (str_display.toString ());
-                flag = true;
-                break;
+                if(!str_display.toString ().equals ("")) {
+                    str_display.append ("+");
+                    display.setText (str_display.toString ());
+                    flag = true;
+                }
+            break;
             case R.id.sub:
                 result_flag = false;
-                //若前面是运算符则删掉前面的运算符,添加点击的运算符
-                if( str_display.toString ().equals ("")){
-                    Toast.makeText(MainActivity.this,"你的内容为空",Toast.LENGTH_SHORT).show ();
-                    break;
-                }else if(str_display.charAt (str_display.length () - 1) == '÷' ||
+                //  若为空就当作负号添加
+                    if( str_display.toString ().equals ("")){
+                        str_display.append ("-");
+                        display.setText (str_display.toString ());
+                        flag = true;
+                        break;
+                    }
+                    //若前面是运算符则删掉前面的运算符,添加点击的运算符
+                    else if(str_display.charAt (str_display.length () - 1) == '-' ||
+                        str_display.charAt (str_display.length () - 1) == '÷' ||
                         str_display.charAt (str_display.length () - 1) == '×'||
                         str_display.charAt (str_display.length () - 1) == '+'||
                         str_display.charAt (str_display.length () - 1) == '^'||
                         str_display.charAt (str_display.length () - 1) == '√'){
 
                     str_display.deleteCharAt (str_display.length () - 1);
+                        display.setText (str_display.toString ());
                 }
-                str_display.append ("-");
-                display.setText (str_display.toString ());
-                flag = true;
+                if(!str_display.toString ().equals ("")) {
+                    str_display.append ("-");
+                    display.setText (str_display.toString ());
+                    flag = true;
+                }
                 break;
             case R.id.mul:
                 result_flag = false;
@@ -243,16 +262,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if( str_display.toString ().equals ("")){
                     Toast.makeText(MainActivity.this,"你的内容为空",Toast.LENGTH_SHORT).show ();
                     break;
-                }else if(str_display.charAt (str_display.length () - 1) == '÷' ||
+                }else if(str_display.charAt (str_display.length () - 1) == '×'||
+                        str_display.charAt (str_display.length () - 1) == '÷' ||
                         str_display.charAt (str_display.length () - 1) == '+'||
                         str_display.charAt (str_display.length () - 1) == '-'||
                         str_display.charAt (str_display.length () - 1) == '^'||
                         str_display.charAt (str_display.length () - 1) == '√'){
                     str_display.deleteCharAt (str_display.length () - 1);
+                    display.setText (str_display.toString ());
                 }
-                str_display.append ("×");
-                display.setText (str_display.toString ());
-                flag = true;
+                if(!str_display.toString ().equals ("")){
+                    str_display.append ("×");
+                    display.setText (str_display.toString ());
+                    flag = true;
+                }
                 break;
             case R.id.square:
                 result_flag = false;
@@ -260,16 +283,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 if( str_display.toString ().equals ("")){
                     Toast.makeText(MainActivity.this,"你的内容为空",Toast.LENGTH_SHORT).show ();
                     break;
-                }else if(str_display.charAt (str_display.length () - 1) == '÷' ||
+                }else if(str_display.charAt (str_display.length () - 1) == '^'||
+                        str_display.charAt (str_display.length () - 1) == '÷' ||
                         str_display.charAt (str_display.length () - 1) == '×'||
                         str_display.charAt (str_display.length () - 1) == '-'||
                         str_display.charAt (str_display.length () - 1) == '+'||
                         str_display.charAt (str_display.length () - 1) == '√'){
                     str_display.deleteCharAt (str_display.length () - 1);
+                    display.setText (str_display.toString ());
                 }
-                str_display.append("^");
-                display.setText (str_display.toString ());
-                flag = true;
+                if(!str_display.toString ().equals ("")) {
+                    str_display.append ("^");
+                    display.setText (str_display.toString ());
+                    flag = true;
+                }
                 break;
             case R.id.sqrt:
                 if (result_flag){
@@ -286,16 +313,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(MainActivity.this,"你的内容为空",Toast.LENGTH_SHORT).show ();
                     break;
                 }else if(str_display.charAt (str_display.length () - 1) == '+' ||
+                        str_display.charAt (str_display.length () - 1) == '÷' ||
                         str_display.charAt (str_display.length () - 1) == '×'||
                         str_display.charAt (str_display.length () - 1) == '-'||
                         str_display.charAt (str_display.length () - 1) == '^'||
                         str_display.charAt (str_display.length () - 1) == '√'){
 
                     str_display.deleteCharAt (str_display.length () - 1);
+                    display.setText (str_display.toString ());
                 }
-                str_display.append("÷");
-                display.setText (str_display.toString ());
-                flag = true;
+                if(!str_display.toString ().equals ("")) {
+                    str_display.append ("÷");
+                    display.setText (str_display.toString ());
+                    flag = true;
+                }
                 break;
             case R.id.sin:
                 if (result_flag){
@@ -344,7 +375,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                  * 若back_index = 3,表示str尾部为ln(,应当一次删除2个
                  * 若back_index = 1,表示为除返回3、2外的所有情况，只需删除一个
                  */
-                int back_index;//为back按钮的删除方式提供依据,默认为0
+                int back_index ;//为back按钮的删除方式提供依据
                 try {
                     if(((str_display.charAt(str_display.length() - 1) == '(' &&
                             str_display.charAt(str_display.length() - 2) == 'n' &&
@@ -468,11 +499,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
        String mathematical ; //用来保存括号内的算式
        String result;    //用来获得算式的结果
        String temp;      //用于替换
-        //如果有首尾括号则去除括号
-       while(input.indexOf ("(") == 0 && input.lastIndexOf (")") == input.length () - 1){
-           input.deleteCharAt (0);
-           input.deleteCharAt (input.length () - 1);
-       }
        /**
         * 首先判断左括号数与右括号数是否相等,如果左括号数与右括号数不相等,则友好提示
         * 有括号的情况:sin(),cos()tan(),log(),ln(),还有就是仅仅一对()
@@ -492,63 +518,60 @@ public class MainActivity extends Activity implements View.OnClickListener {
            //如果不等就返回mismatch,并做出友好提示
            return "mismatch";
        }
-       //为了防止(在同一个if语句里面判断)出现StringIndexOutOfBoundsException,所以在这里分开进行讨论
-       while(input.indexOf ("(") != -1 && input.indexOf (")") != -1){
-           if(input.toString().contains("ln")){
-               //计算ln类型
-               while(input.indexOf ("(") != -1 && input.indexOf (")") != -1){
-                   //先获得第一对括号里的算式
-                   mathematical = input.substring (input.indexOf ("(") + 1, input.indexOf (")"));
-                   //计算获得的算式,并获得计算结果
-                   result = countingMathematical (mathematical);
-                   if(input.substring (input.indexOf ("(") - 2,input.indexOf ("(")).equals ("ln")) {
-                       temp = new DecimalFormat ("#.########").format (Math.log (Double.parseDouble (result)));//log默认以e为底
-                       //将ln()替换掉
-                       input = input.replace (input.indexOf ("(") - 2, input.indexOf (")") + 1, temp);
-                   }
-               }
-           }else if(input.toString().contains("sin") ||input.toString().contains("cos") ||input.toString().contains("tan") ||input.toString().contains("log") ){
-               //先获得第一对括号里的算式
-               mathematical = input.substring (input.indexOf ("(") + 1, input.indexOf (")"));
-               //计算获得的算式,并获得计算结果
-               result = countingMathematical (mathematical);
-               //先判断类型再计算
-               //计算sin()类型
-               if(input.substring (input.indexOf ("(") - 3,input.indexOf ("(")).equals ("sin")){
-                   temp = new DecimalFormat ("#.########").format (Math.sin (Double.parseDouble (result)));
-                   //将sin()替换掉
-                   input = input.replace (input.indexOf ("(") - 3,input.indexOf (")") + 1,temp);
-               }
-               // 计算cos()类型
-               else if(input.substring (input.indexOf ("(") - 3,input.indexOf ("(")).equals ("cos")){
-                   temp = new DecimalFormat ("#.########").format (Math.cos (Double.parseDouble (result)));
-                   //将cos()替换掉
-                   input = input.replace (input.indexOf ("(") - 3,input.indexOf (")") + 1,temp);
-               }
-               // 计算tan()类型
-               else if(input.substring (input.indexOf ("(") - 3,input.indexOf ("(")).equals ("tan")){
-                   temp = new DecimalFormat ("#.########").format (Math.tan (Double.parseDouble (result)));
-                   //将tan()替换掉
-                   input = input.replace (input.indexOf ("(") - 3,input.indexOf (")") + 1,temp);
-               }
-               // 计算log()类型
-               else if(input.substring (input.indexOf ("(") - 3,input.indexOf ("(")).equals ("log")) {
-                   temp = new DecimalFormat ("#.########").format (Math.log10 (Double.parseDouble (result)));
-                   //将log()替换掉
-                   input = input.replace (input.indexOf ("(") - 3, input.indexOf (")") + 1, temp);
-               }
-           }else {
-               //最后一种情况,即就是仅仅一对()的情况
-               //先获得第一对括号里的算式
-               mathematical = input.substring (input.indexOf ("(") + 1, input.indexOf (")"));
-               //计算获得的算式,并获得计算结果
-               result = countingMathematical (mathematical);
-               if(!result.equals("")){
-                   input = input.replace (input.indexOf ("("), input.indexOf (")") + 1, result);
-               }
+       while(input.toString().contains("ln") || input.toString().contains("log") || input.toString().contains("sin") || input.toString().contains("cos") || input.toString().contains("tan")){
+           //获得离最后一个左括号"(" 最近的右括号")"的位置
+           //不直接用input.lastIndexOf("("))的原因是,若是在一对括号里计算三角函数,这会出现括号不匹配的问题
+           //例如(ln(e)+log(100))+1,若是直接用input.lastIndexOf("(")),则传入mathematical变量的将是"100)"
+           //minRight等于离最后一个"("最近的")"的距离加上最后一个"("之前的长度
+           int minRight = input.substring(input.lastIndexOf("(")).indexOf(")") + input.substring(0,input.lastIndexOf("(")).length();
+           //先获得最后一对括号里的算式
+           mathematical = input.substring (input.lastIndexOf("(") + 1,minRight);
+           //计算获得的算式,并获得计算结果
+           result = countingMathematical (mathematical);
+           //先判断类型再计算
+           //计算ln()类型
+           if(input.substring (input.lastIndexOf ("(") - 2,input.lastIndexOf ("(")).equals ("ln")) {
+               temp = new DecimalFormat ("#.########").format (Math.log(Double.parseDouble (result)));
+               //将ln()替换掉
+               minRight = input.substring(input.lastIndexOf("(")).indexOf(")") + input.substring(0,input.lastIndexOf("(")).length();
+               input = input.replace (input.lastIndexOf ("(") - 2, minRight + 1, temp);
+           }//计算sin()类型
+           else if(input.substring (input.lastIndexOf ("(") - 3,input.lastIndexOf ("(")).equals ("sin")) {
+               temp = new DecimalFormat ("#.########").format (Math.sin (Double.parseDouble (result)));
+               //将sin()替换掉
+               minRight = input.substring(input.lastIndexOf("(")).indexOf(")") + input.substring(0,input.lastIndexOf("(")).length();
+               input = input.replace (input.lastIndexOf ("(") - 3,minRight + 1,temp);
+           }
+           // 计算cos()类型
+           else if(input.substring (input.lastIndexOf ("(") - 3,input.lastIndexOf ("(")).equals ("cos")) {
+               temp = new DecimalFormat ("#.########").format (Math.cos (Double.parseDouble (result)));
+               //将cos()替换掉
+               minRight = input.substring(input.lastIndexOf("(")).indexOf(")") + input.substring(0,input.lastIndexOf("(")).length();
+               input = input.replace (input.lastIndexOf ("(") - 3,minRight+ 1,temp);
+           }
+           // 计算tan()类型
+           else if(input.substring (input.lastIndexOf ("(") - 3,input.lastIndexOf ("(")).equals ("tan")) {
+               temp = new DecimalFormat ("#.########").format (Math.tan (Double.parseDouble (result)));
+               //将tan()替换掉
+               minRight = input.substring(input.lastIndexOf("(")).indexOf(")") + input.substring(0,input.lastIndexOf("(")).length();
+               input = input.replace (input.lastIndexOf ("(") - 3,minRight+ 1,temp);
+           }
+           //计算log()类型
+           else if(input.substring (input.lastIndexOf ("(") - 3, input.lastIndexOf ("(")).equals ("log")) {
+               temp = new DecimalFormat ("#.########").format (Math.log10 (Double.parseDouble (result)));
+               //将log()替换掉
+               minRight = input.substring(input.lastIndexOf("(")).indexOf(")") + input.substring(0,input.lastIndexOf("(")).length();
+               input = input.replace (input.lastIndexOf ("(") - 3, minRight + 1, temp);
            }
        }
-        //全都替换完之后,计算最终结果
+       while(input.toString().contains("(")){
+           //先获得最后一对括号里的算式
+           mathematical = input.substring (input.lastIndexOf("(") + 1, input.lastIndexOf(")"));
+           //计算获得的算式,并获得计算结果
+           result = countingMathematical (mathematical);
+           input = input.replace (input.lastIndexOf ("("), input.lastIndexOf (")") + 1, result);
+       }
+       //全都替换完之后,计算最终结果
        result = countingMathematical (input.toString ());
        if(result.equals ("zero"))
        {
@@ -627,106 +650,90 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
         //在算式中有加号和减号时,先乘除后加减,先根据加减号拆分字符串;若没有加减号就是从左往右算
-        if((strMath.contains ("×") || strMath.contains ("÷") ) && (strMath.contains ("+") || strMath.contains ("-"))){
-            double acc = 1.0;
-            String[] array = strMath.split ("\\+|-|÷");//array现在只含乘号或者只含乘号和除号
-            for(String arrays : array) {
-                //算式里有乘号的情况
-                if (arrays.contains ("×")) {
-                    //据乘号进行拆分
-                    String[] array2 = arrays.split ("×");//array2是乘号的左右项
-                    for (String arrays2 : array2) {
-                        acc *= Double.parseDouble (arrays2);
-                    }
-                    strMath = strMath.replace (arrays, String.valueOf (acc));
-                    acc = 1.0;
-                }
-            }
-                if(strMath.contains("÷")) {
-                    double quo;
-                    String[] array3 = strMath.split ("\\+|-");
-                    for (String arrays3 : array3) {
-                        if (arrays3.contains ("÷")) {
-                            String[] array4 = arrays3.split ("÷");
-                            quo = Double.parseDouble (array4[0]);
-                            for (int i = 1; i < array4.length; ++i) {
-                                if (Double.parseDouble (array4[i]) == 0.0) {
-                                    return "zero";  //除数不能为0
-                                }
-                                quo /= Double.parseDouble (array4[i]);
-                            }
-                            strMath = strMath.replace (arrays3, new DecimalFormat ("#.######").format (quo));
+        if(strMath.contains ("÷") || strMath.contains ("×")) {
+            String[] array = strMath.split ("\\+|-");
+            for (String arrays : array) {
+                double acc = 1.0;
+                int j = 0; //各个数字的序号
+                String[] strings = arrays.split ("×|÷");//先将各个数字分割开
+                acc *= Double.parseDouble (strings[j++]);
+                char[] chars = arrays.toCharArray ();//将字符串分割成单个字符,便于用于判读符号为乘号还是除号
+                for (char chars1 : chars) {
+                    if (chars1 == '×') {
+                        acc *= Double.parseDouble (strings[j]);
+                        j++;
+                    } else if (chars1 == '÷') {
+                        if (Double.parseDouble (strings[j]) == 0.0) {
+                            return "zero";   //除数不能为0
                         }
+                        acc /= Double.parseDouble (strings[j]);
+                        j++;
                     }
                 }
-        }
-        //只有乘号和除号就从左往右算
-        else if(strMath.contains ("÷") || strMath.contains ("×")){
-            double acc = 1.0;
-            int j = 0 ; //各个数字的序号
-            String[] strings = strMath.split ("×|÷");//先将各个数字分割开
-            acc *= Double.parseDouble (strings[j++]);
-            char[] chars = strMath.toCharArray ();//将字符串分割成单个字符,便于用于判读符号为乘号还是除号
-            for(char chars1 : chars){
-                if(chars1 == '×'){
-                    acc *= Double.parseDouble (strings[j]);
-                    j++;
-                }else if(chars1 == '÷'){
-                    if (Double.parseDouble (strings[j]) == 0.0){
-                        return "zero";   //除数不能为0
-                    }
-                    acc *= 1 / Double.parseDouble (strings[j]);
-                }
+                strMath = strMath.replace (arrays, new DecimalFormat ("#.########").format (acc));
             }
-            //因为不含加减号,所以到这里计算就结束了
-            strMath = strMath.replace (strMath,new DecimalFormat("#.########").format (acc));
-            if(strMath.length () > 11){
-                strMath = new DecimalFormat ("#.######E000").format (Double.parseDouble (strMath));
-            }
-            return strMath;
-        }
-        //若字符串首位为"-",则认为是负数,直接返回
-        if(strMath.indexOf("-") == 0){
-            return strMath;
         }
         if(strMath.contains ("+") || strMath.contains ("-")){
             double sum = 0.0;
             int j  = 0;    //各个数字的序号
+
+            //针对当替换掉三角函数或对数后,出现加"负号"的情况,即字符串中出现"+-",应该把前面的+删除
+            for(int i = 0 ; i < strMath.toCharArray().length - 1; ++i){
+                if(strMath.toCharArray()[i] == '+' && strMath.toCharArray()[i+1] == '-'){
+                    strMath = strMath.replace(strMath, (strMath.substring(0, i)+strMath.substring(i+1)));
+                }
+            }
             String[] strings = strMath.split ("\\+|-");//先将各个数字分割开
-            sum += Double.parseDouble (strings[j++]);
             char[] chars = strMath.toCharArray ();//将字符串分割成单个字符,便于用于判读符号为加号还是减号
-            for(char chars1 : chars){
-                if (chars1 == '+'){
-                    sum += Double.parseDouble (strings[j]);
-                    j++;
-                }else if(chars1 == '-'){
-                    sum -= Double.parseDouble (strings[j]);
-                    j++;
+            //若第一个字符是负号,则认为是负数,否则将按照一般加减算式进行计算
+            if(chars[0] == '-'){
+                j++;//又因为负数拆分后,负号前面也将算作一个字符,下标为0(即使没有数字),所以j++直接进行数字的运算
+            }else{
+                sum += Double.parseDouble(strings[j++]);
+            }
+            for (char c : chars) {
+                if(c == '-'){
+                    sum -= Double.parseDouble(strings[j++]);
+                }
+                else if(c == '+'){
+                    sum += Double.parseDouble(strings[j++]);
                 }
             }
             strMath = strMath.replace (strMath,new DecimalFormat("#.########").format (sum));
         }
-        if(strMath.length () > 11){
+        //若得出来的数的整数部分大于指定值就用科学计数法显示
+        double indexDou = Double.valueOf (strMath);
+        int indexInt = (int) indexDou;
+        if(indexInt > 1000000000){
+            strMath = new DecimalFormat ("#.######E000").format (Double.parseDouble (strMath));
+        }
+        if(indexInt < -1000000000){
             strMath = new DecimalFormat ("#.######E000").format (Double.parseDouble (strMath));
         }
         return strMath;
     }
 
     /**
-     * 计算阶乘
+     * 计算阶乘,主要是将接收到的字符串转为整形,并去掉阶乘符号
      * @param strFac  传入的阶乘字符串
      * @return  返回阶乘计算结果
      */
     public String countFactorial(String strFac) {
+        int n = Integer.parseInt(strFac.substring(0,strFac.length() - 1));
+        return String.valueOf(factorial(n));
+    }
 
-        int number = Integer.parseInt(strFac.substring(0, strFac.length() - 1));
-        long sum = 1;
-        for (int i = 1; i <= number ; ++i) {
-            sum *= i;
+    /**
+     * 递归计算阶乘
+     * @param n 要计算的阶乘
+     * @return 结果
+     */
+    public  BigInteger factorial(int n){
+        if(n > 0){
+            return BigInteger.valueOf(n).multiply(factorial(n-1));
+        }else{
+        //因0！= 1   所以 n <= 1 时返回 1
+            return BigInteger.ONE;
         }
-        if(sum >= Long.MAX_VALUE/100000000){
-            return new DecimalFormat ("#.######E000").format (sum);
-        }
-        return String.valueOf(sum);
     }
 }

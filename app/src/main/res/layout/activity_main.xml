@@ -9,16 +9,21 @@
     android:weightSum="1"
     android:background="#066ec8"
   >
+
     <com.example.administrator.mycaculator.Display
         android:layout_width="match_parent"
         android:layout_height="116dp"
         android:id="@+id/display"
-        android:textSize="25sp"
+        android:textSize="40sp"
         android:cursorVisible="true"
+        android:singleLine="true"
         android:gravity="end|bottom"
         android:background="#99ccff"
+        android:paddingBottom="0dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginLeft="1dp"
        />
     <TableRow
     android:layout_width="wrap_content"
