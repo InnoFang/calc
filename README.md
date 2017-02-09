@@ -1,5 +1,8 @@
-### 科学计算器MyCalculator
+# MyCalculator
 
+科学计算器
+
+----
 
 * 功能:
   * 提供π和e两个值
