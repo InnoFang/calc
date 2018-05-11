@@ -71,6 +71,6 @@ class Parser(private val lexer: Lexer) {
         return node
     }
 
-    fun parse() = expr()
+    fun parse(): BinOp = expr() as BinOp
 
 }
