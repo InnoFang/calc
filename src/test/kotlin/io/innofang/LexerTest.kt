@@ -1,3 +1,5 @@
+package io.innofang
+
 import org.junit.Test
 
 /**

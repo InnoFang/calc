@@ -1,8 +1,10 @@
+package io.innofang
+
 /**
  * Created by Inno Fang on 2018/5/10.
  */
 
-import TokenType.*
+import io.innofang.TokenType.*
 
 abstract class NodeVisitor {
     protected fun error(): Nothing = throw Exception("Invalid type")

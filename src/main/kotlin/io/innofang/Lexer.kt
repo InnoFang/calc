@@ -1,8 +1,10 @@
+package io.innofang
+
 /**
  * Created by Inno Fang on 2018/5/10.
  */
 
-import TokenType.*
+import io.innofang.TokenType.*
 
 public class Lexer(private val text: String) {
     private var pos: Int = 0
