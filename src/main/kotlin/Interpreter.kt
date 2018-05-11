@@ -4,27 +4,32 @@
 
 import TokenType.*
 
-interface NodeVisitor {
-    fun visit(binOp: BinOp): Int
-    fun visit(num: Num): Int
+abstract class NodeVisitor {
+    protected fun error(): Nothing = throw Exception("Invalid type")
+
+    fun visit(ast: Ast): Int {
+        if (ast is BinOp) return visitBinOp(ast)
+        if (ast is Num) return visitNum(ast)
+        error()
+    }
+    abstract fun visitBinOp(binOp: BinOp): Int
+    abstract fun visitNum(num: Num): Int
 }
 
-class Interpreter(val parser: Parser): NodeVisitor {
+class Interpreter(private val parser: Parser): NodeVisitor() {
 
-    private fun error(): Nothing = throw Exception("Invalid type")
-
-    override fun visit(node: BinOp): Int {
-        return when (node.op.type) {
-            PLUS -> visit(node.left as Num) + visit(node.right as Num)
-            MINUS -> visit(node.left as Num) - visit(node.right as Num)
-            MUL -> visit(node.left as Num) * visit(node.right as Num)
-            DIV -> visit(node.left as Num) / visit(node.right as Num)
+    override fun visitBinOp(binOp: BinOp): Int {
+        return when (binOp.op.type) {
+            PLUS -> visit(binOp.left) + visit(binOp.right)
+            MINUS -> visit(binOp.left) - visit(binOp.right)
+            MUL -> visit(binOp.left) * visit(binOp.right)
+            DIV -> visit(binOp.left) / visit(binOp.right)
             else -> error()
         }
     }
 
-    override fun visit(node: Num): Int {
-        return node.value as Int
+    override fun visitNum(num: Num): Int {
+        return num.value as Int
     }
 
     fun interpret(): Int {
