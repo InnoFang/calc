@@ -2,7 +2,7 @@
 
 A simple command-line calculator written in Kotlin
 
-**PS** this is a practice project of an interpreter, to implement a command-line calculator, I design a series of grammar to do to do so instead of using _reverse Polish notation (RPN)_
+**PS** this is a practice project of an interpreter, to implement a command-line calculator, I design a series of grammar to do so instead of using _reverse Polish notation (RPN)_
 
 # Grammar
 
@@ -45,7 +45,13 @@ calc> 345 / 5 * ( 234 - 92 ) + 66
 calc>
 ```
 
-# [License]()
+# Reference
+
+ + [lsbasi](https://github.com/rspivak/lsbasi)
+
+this project gave me inspiration and idea, as well as help me a lot, thanks
+
+# [License](https://github.com/InnoFang/calc/blob/master/LICENSE)
 
            Copyright 2018 InnoFang
 
