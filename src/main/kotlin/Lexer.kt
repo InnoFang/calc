@@ -10,18 +10,18 @@ public class Lexer(private val text: String) {
 
     private fun error(): Nothing = throw Exception("Invalid character")
 
-    fun advance() {
+    private fun advance() {
         pos += 1
         currentChar = if (pos > text.lastIndex) null else text[pos]
     }
 
-    fun skipWhitespace() {
+    private fun skipWhitespace() {
         while (currentChar != null && currentChar!!.isWhitespace()) {
             advance()
         }
     }
 
-    fun integer(): Int {
+    private fun integer(): Int {
         var result = ""
         while (currentChar != null && currentChar!!.isDigit()) {
             result += currentChar
