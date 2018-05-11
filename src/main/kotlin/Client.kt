@@ -1,11 +1,11 @@
-import java.io.BufferedReader
-import java.io.InputStreamReader
-
 /**
  * Created by Inno Fang on 2018/5/10.
  */
 
-//2 *  (5 + 1) / 3 - 1
+
+import java.io.BufferedReader
+import java.io.InputStreamReader
+
 fun main(args: Array<String>) {
     while (true) {
         try {
