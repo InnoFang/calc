@@ -9,11 +9,12 @@ buildscript {
     }
 }
 
-apply plugin: 'application'
+
 
 group 'io.innofang'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
+apply plugin: 'application'
 apply plugin: 'java'
 apply plugin: 'kotlin'
 
@@ -23,9 +24,11 @@ repositories {
     mavenCentral()
 }
 
+mainClassName = 'io.innofang.Main'
+
 jar {
     manifest {
-        attributes "Main-Class": "ClientKt"
+        attributes "Main-Class": mainClassName
     }
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }

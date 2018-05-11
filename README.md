@@ -2,24 +2,7 @@
 
 A simple command-line calculator written in Kotlin
 
-# Token
-
-## Operator
-
-+, -, *, /
-
-## Token
-
-```
-INTEGER("INTEGER"),
-PLUS("PLUS"),
-MINUS("MINUS"),
-MUL("MUL"),
-DIV("DIV"),
-LPAREN("("),
-RPAREN(")"),
-EOF("EOF"),
-```
+**PS** this is a practice project of an interpreter, to implement a command-line calculator, I design a series of grammar to do to do so instead of using _reverse Polish notation (RPN)_
 
 # Grammar
 
@@ -31,15 +14,35 @@ factor : INTEGER | LPAREN expr RPAREN
 
 # Usage
 
+open your terminal, and type
+
 ```
-calc> 1
-1
-calc> 1+2
-3
-calc> 3 * 4
+gradle build
+```
+
+Then, there is a file named `calc-1.0.0.jar` in the `build/libs`
+
+```
+cd build/libs
+java -jar calc-1.0.0.jar
+```
+
+# Example
+
+you can use like this
+
+```
+calc> 12
 12
-calc> 2 *  (5 + 1) / 3 - 1
-3
+calc> 34 * 56
+1904
+calc> 1234 + 87123 - 19283
+69074
+calc> 22 * 12 - 172 + 56
+148
+calc> 345 / 5 * ( 234 - 92 ) + 66
+9864
+calc>
 ```
 
 # [License]()

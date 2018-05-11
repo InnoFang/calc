@@ -1,3 +1,4 @@
+@file:JvmName("Main")
 package io.innofang
 
 /**
