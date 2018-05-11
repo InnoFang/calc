@@ -21,20 +21,31 @@ class Parser(private val lexer: Lexer) {
 
 
     /**
-     * factor: INTEGER | LPAREN expr RPAREN
+     * factor: (PLUS | MINUS) factor | INTEGER | LPAREN expr RPAREN
      */
     private fun factor(): Ast {
         val token = currentToken
-        if (token.type == INTEGER) {
-            eat(INTEGER)
-            return Num(token)
-        } else if (token.type == LPAREN) {
-            eat(LPAREN)
-            val node = expr()
-            eat(RPAREN)
-            return node
+        when {
+            token.type == PLUS -> {
+                eat(PLUS)
+                return UnaryOp(token, factor())
+            }
+            token.type == MINUS -> {
+                eat(MINUS)
+                return UnaryOp(token, factor())
+            }
+            token.type == INTEGER -> {
+                eat(INTEGER)
+                return Num(token)
+            }
+            token.type == LPAREN -> {
+                eat(LPAREN)
+                val node = expr()
+                eat(RPAREN)
+                return node
+            }
+            else -> error()
         }
-        error()
     }
 
     /**

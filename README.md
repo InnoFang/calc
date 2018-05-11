@@ -9,7 +9,7 @@ A simple command-line calculator written in Kotlin
 ```
 expr   : factor (( PLUS | MINUS) factor) *
 term   : factor (( MUL  | DIV  ) factor) *
-factor : INTEGER | LPAREN expr RPAREN
+factor : (PLUS | MINUS) factor | INTEGER | LPAREN expr RPAREN
 ```
 
 # Usage
@@ -42,7 +42,10 @@ calc> 22 * 12 - 172 + 56
 148
 calc> 345 / 5 * ( 234 - 92 ) + 66
 9864
-calc>
+calc> 1 ------------ 2
+3
+calc> 2 ++++-----+++ 3
+-1
 ```
 
 # Reference

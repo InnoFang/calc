@@ -14,3 +14,7 @@ class BinOp(val left: Ast, val op: Token, val right: Ast) : Ast() {
 class Num(val token: Token) : Ast() {
     val value = token.value
 }
+
+class UnaryOp(val op: Token, val expr: Ast): Ast(){
+    val token = op
+}

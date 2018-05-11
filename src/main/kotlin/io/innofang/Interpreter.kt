@@ -12,13 +12,16 @@ abstract class NodeVisitor {
     fun visit(ast: Ast): Int {
         if (ast is BinOp) return visitBinOp(ast)
         if (ast is Num) return visitNum(ast)
+        if (ast is UnaryOp) return visitUnaryOp(ast)
         error()
     }
+
     abstract fun visitBinOp(binOp: BinOp): Int
     abstract fun visitNum(num: Num): Int
+    abstract fun visitUnaryOp(unaryOp: UnaryOp): Int
 }
 
-class Interpreter(private val parser: Parser): NodeVisitor() {
+class Interpreter(private val parser: Parser) : NodeVisitor() {
 
     override fun visitBinOp(binOp: BinOp): Int {
         return when (binOp.op.type) {
@@ -32,6 +35,16 @@ class Interpreter(private val parser: Parser): NodeVisitor() {
 
     override fun visitNum(num: Num): Int {
         return num.value as Int
+    }
+
+    override fun visitUnaryOp(unaryOp: UnaryOp): Int {
+        val op = unaryOp.op.type
+        if (op == PLUS) {
+            return +visit(unaryOp.expr)
+        } else if (op == MINUS) {
+            return -visit(unaryOp.expr)
+        }
+        error()
     }
 
     fun interpret(): Int {
