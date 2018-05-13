@@ -17,14 +17,16 @@ factor : (PLUS | MINUS) factor | INTEGER | LPAREN expr RPAREN
 open your terminal, and type
 
 ```
-gradle build
+> $ git clone git@github.com:InnoFang/calc.git
+> $ cd calc
+> $ gradle build
 ```
 
 Then, there is a file named `calc-1.0.0.jar` in the `build/libs`
 
 ```
-cd build/libs
-java -jar calc-1.0.0.jar
+> $ cd build/libs
+> $ java -jar calc-1.0.0.jar
 ```
 
 # Example
